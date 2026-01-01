@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sample Websites</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #140c24, #050208 70%);
+      color: #ffffff;
+    }
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px 5%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  backdrop-filter: blur(14px);
+  background: rgba(5, 2, 8, 0.6);
+  z-index: 1000;
+}
+
+.brand {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand img {
+  height: 36px;
+  width: auto;
+}
+
+.brand-name {
+  font-family: 'Caveat', cursive;
+  font-size: 2.1rem;
+  background: linear-gradient(90deg, #ff4ecd, #6b8cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+  grid-column: 3;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.back-btn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid #a855f7;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: #a855f7;
+  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.35);
+}
+
+/* OFFSET CONTENT FOR FIXED HEADER */
+.samples-section {
+  padding-top: 180px;
+}
+
+    /* SECTION */
+    .samples-section {
+      padding: 120px 5%;
+      text-align: center;
+    }
+
+    /* TITLE */
+    .samples-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      background: linear-gradient(90deg, #ff4ecd, #6b8cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .title-underline {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #ff4ecd, #6b8cff);
+      margin: 0 auto 80px;
+      border-radius: 10px;
+    }
+
+    /* GRID */
+    .samples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 80px;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    /* CARD */
+    .sample-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sample-card h3 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .preview {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 0 60px rgba(140, 90, 255, 0.25);
+      margin-bottom: 20px;
+    }
+
+    .preview img {
+      width: 100%;
+      display: block;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #cfcfcf;
+      max-width: 420px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    /* BUTTONS */
+    .btn {
+      width: 100%;
+      max-width: 420px;
+      padding: 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 14px;
+        display: inline-block;
+  text-align: center;
+  text-decoration: none;
+    }
+
+    .btn-demo {
+      background: #a855f7;
+      color: white;
+    }
+
+    .btn-demo:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-buy {
+      background: transparent;
+      color: white;
+      border: 1px solid #a855f7;
+    }
+
+    .btn-buy:hover {
+      background: #a855f7;
+    }
+
+    @media (max-width: 768px) {
+      .samples-section {
+        padding: 80px 6%;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+<header class="header">
+
+  <!-- Empty left spacer for perfect centering -->
+  <div></div>
+
+  <!-- Brand -->
+  <div class="brand">
+    <!-- Optional logo -->
+    <img src="assets/logo.png" alt="Gift a Link Logo">
+    <span class="brand-name">Gift a Link</span>
+  </div>
+
+  <!-- Right Button -->
+  <div class="header-actions">
+    <a href="https://giftalink.store" class="back-btn">
+      Back to Website
+    </a>
+  </div>
+
+</header>
+
+  <section class="samples-section">
+
+    <h1 class="samples-title">Sample Websites</h1>
+    <div class="title-underline"></div>
+
+    <div class="samples-grid">
+
+<!-- Spotify Wrapped -->
+<div class="sample-card">
+  <h3>Spotify "Wrapped" Theme</h3>
+
+  <div class="preview">
+    <img src="assets/spotifywrappedcover.png" alt="Spotify Wrapped Demo">
+  </div>
+
+  <p class="description">
+    We create with intention. Our products solve real problems with clean design and honest materials.
+  </p>
+
+  <!-- View Demo -->
+  <a href="/spotifysample" class="btn btn-demo">
+    View Demo
+  </a>
+
+  <!-- Purchase -->
+  <a href="https://giftalink.store/products/the-spotify-wrapped-theme?variant=45470919491770"
+     class="btn btn-buy"
+     target="_blank"
+     rel="noopener noreferrer">
+    Get Yours Now!
+  </a>
+</div>
+
+
+      <!-- Netflix Story -->
+      <div class="sample-card">
+        <h3>Netflix Story Theme</h3>
+
+        <div class="preview">
+          <img src="assets/netfcover.png" alt="Netflix Story Demo">
+        </div>
+
+        <p class="description">
+          We obsess over the details and strive to deliver the best products at the best prices, every time.
+        </p>
+ <!-- View Demo -->
+  <a href="/netflixsample" class="btn btn-demo">
+    View Demo
+  </a>
+
+  <!-- Purchase -->
+  <a href="https://giftalink.store/products/netflix-themed-custom-website?view=netflix-theme-product"
+     class="btn btn-buy"
+     target="_blank"
+     rel="noopener noreferrer">
+    Get Yours Now!
+  </a>
+</div>
+
+    </div>
+  </section>
+
+</body>
+</html>
