@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alia & Ranbir's Journey!</title>
+  <link rel="icon" href="../favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="surprise.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- PASSWORD SCREEN -->
+  <div id="lockScreen">
+    <div class="lock-box">
+      <div class="heart-lock">
+        <i class="fas fa-lock"></i>
+        <i class="fas fa-heart"></i>
+      </div>
+      <h1>Private Screening 🔒</h1>
+      <p class="sub-lock">Only Accessible to My Alia!</p>
+      <div class="password-container">
+        <input type="password" id="passwordInput" placeholder="Enter Password" autocomplete="off">
+        <button onclick="unlock()" class="unlock-btn">
+          <i class="fas fa-key"></i> Unlock
+        </button>
+      </div>
+      <p class="hint">Hint: Password is 1234</p>
+      <p id="errorMsg"></p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="mainContent">
+    <header class="nav">
+      <div class="logo">
+       Alia & Ranbir's Personal NETFLIX <i class="fas fa-heart"></i> 
+      </div>
+      <div class="nav-right">
+        <div class="music-toggle">
+          <button id="musicBtn" onclick="toggleMusic()">
+            <i class="fas fa-music"></i> Play Music
+          </button>
+        </div>
+        <div class="profile">❤️</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="overlay"></div>
+      <div class="hero-content fade-in">
+        <h1>Alia & Ranbir  <i class="fas fa-heart"></i></h1>
+        <p class="subtitle">The Most Unexpected yet Most Adventurous Love Story!</p>
+        <p class="meta">Romance • Real Life • Forever</p>
+        <button class="play-btn" onclick="scrollToStory()">
+          <i class="fas fa-play"></i> Play Our Story
+        </button>
+        <div class="hero-stats">
+          <div class="stat">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Season 1 • 2025</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-star"></i>
+            <span>5.0 ★ Rating</span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-clock"></i>
+            <span>Lifetime Runtime</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-down">
+        <span></span>
+      </div>
+    </section>
+
+    <section class="trailer">
+      <h2><i class="fas fa-film"></i> Official Trailer</h2>
+      <div class="video-container">
+        <video controls poster="assets/trailervid.png">
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">
+          <button class="play-video-btn" onclick="playTrailer()">
+            <i class="fas fa-play-circle"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="episode fade-in">
+      <div class="episode-header">
+        <span class="season-badge">Season 1</span>
+        <h2>Episode 1: The Beginning</h2>
+        <div class="episode-meta">
+          <span><i class="far fa-clock"></i> 45 min</span>
+          <span><i class="far fa-calendar"></i> March 2023</span>
+        </div>
+      </div>
+      <p class="episode-desc">
+        It didn't start like a movie.<br>
+        Instead, it began with me being your asshole senior at the office!<br>
+        You started as nothing more than a Junior to me and you ended up being my everything. ❤️
+      </p>
+      <div class="episode-image">
+        <img src="assets/yelling.png" alt="Our Beginning" loading="lazy">
+        <div class="image-caption">Here's a literal cartoon of how we'd be in office!</div>
+      </div>
+      <div class="episode-quote">
+        <i class="fas fa-quote-left"></i>
+        Sometimes the best things begin with the worst impressions.
+        <i class="fas fa-quote-right"></i>
+      </div>
+    </section>
+
+    <section class="episode fade-in">
+      <div class="episode-header">
+        <span class="season-badge">Season 1</span>
+        <h2>Episode 2: More Than Just Colleagues</h2>
+        <div class="episode-meta">
+          <span><i class="far fa-clock"></i> 52 min</span>
+          <span><i class="far fa-calendar"></i> June 2023</span>
+        </div>
+      </div>
+      <p class="episode-desc">
+        Somewhere between being your shitty senior to late-night talks,<br>
+        random smiles,<br>
+        and missing you a little too much…<br>
+        I fell for you, hard. ❤️
+      </p>
+      <div class="episode-image">
+        <img src="assets/beginning.png" alt="Our Beginning" loading="lazy">
+        <div class="image-caption">When work chats became heart-to-hearts</div>
+      </div>
+    </section>
+
+    <section class="finale">
+      <div class="finale-content">
+        <h2><i class="fas fa-crown"></i> Season Finale</h2>
+        <div class="finale-text">
+          <p>Baby,</p>
+          <p>This isn't just a season.</p>
+          <p>It's a lifetime I want with you.</p>
+          <div class="finale-highlight">
+            Same story.<br>
+            Same love.<br>
+            Every season, Every Episode, Every Day, Every Hour & Every Minute.
+          </div>
+        </div>
+        <div class="finale-heart">
+          <i class="fas fa-heart"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-header">
+      <h2><i class="fas fa-star"></i> Fan Favourite Moments from the Series 😍</h2>
+      <p class="section-subtitle">Click on any photo to relive the memory.</p>
+    </section>
+
+  <section class="memories">
+  <div class="memory-grid">
+    <div class="memory-card" onclick="openMemory(0)" data-memory-index="0">
+      <img src="assets/us1.jpeg" alt="Photo Comparison" loading="lazy">
+      <div class="memory-overlay">
+        <i class="fas fa-expand"></i>
+        <p>You being the photo-genic one and me being exactly the opposite!</p>
+      </div>
+    </div>
+    <div class="memory-card" onclick="openMemory(1)" data-memory-index="1">
+      <img src="assets/us2.png" alt="Bullet Rides" loading="lazy">
+      <div class="memory-overlay">
+        <i class="fas fa-expand"></i>
+        <p>Our Bullet Rides Together. 😘</p>
+      </div>
+    </div>
+    <div class="memory-card" onclick="openMemory(2)" data-memory-index="2">
+      <img src="assets/us3.png" alt="Late Night Drives" loading="lazy">
+      <div class="memory-overlay">
+        <i class="fas fa-expand"></i>
+        <p>Late Night Drives to Get Chai for you. ❤️</p>
+      </div>
+    </div>
+    <div class="memory-card" onclick="openMemory(3)" data-memory-index="3">
+      <img src="assets/us4.png" alt="Best Kisser" loading="lazy">
+      <div class="memory-overlay">
+        <i class="fas fa-expand"></i>
+        <p>You Being the Best Kisser Ever!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section class="section-header">
+      <h2><i class="fas fa-envelope-open-heart"></i> Love Note from your Shehzada :)</h2>
+    </section>
+
+    <section class="love-note">
+      <div class="note-container">
+        <div class="note-header">
+          <i class="fas fa-feather-alt"></i>
+          <h3>To My Dearest Alia,</h3>
+        </div>
+        <div class="note-content">
+          <p>
+            I don't know when it happened —<br>
+            there was no exact moment, no dramatic scene.<br>
+            Just you slowly becoming my favorite thought every day.
+          </p>
+          <div class="note-highlight">
+            <i class="fas fa-quote-left"></i>
+            In a world full of noise, you feel like peace.<br>
+            Your smile feels like home.
+            <i class="fas fa-quote-right"></i>
+          </div>
+          <p>
+            This is just a note,<br>
+            but my feelings for you are a whole series —<br>
+            with no final episode planned.<br>
+            Thank you for being my peace, always!
+          </p>
+        </div>
+        <div class="note-signature">
+          <p>Always & Forever yours,</p>
+          <h4>Ranbir ❤️</h4>
+        </div>
+        <div class="note-seal">
+          <i class="fas fa-heart"></i>
+          <span>Sealed with Love</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="teaser">
+      <div class="teaser-header">
+        <span class="teaser-badge">Coming Soon</span>
+        <h2><i class="fas fa-tv"></i> Season 2 is Currently Under Production!</h2>
+      </div>
+      <div class="teaser-content">
+        <p>
+          Alia and Ranbir will be back,<br>
+          to make you feel more wholesome with their existence! ❤️
+        </p>
+        <div class="teaser-highlight">
+          Alia, you will always be the Elena to my Damon!<br>
+          Camie to my Klaus,<br>
+          Eleven to my Mike. ❤️
+        </div>
+        <div class="teaser-countdown">
+          <p>Season 2 premieres in: <span id="season2Days">365</span> days</p>
+          <div class="teaser-progress">
+            <div class="teaser-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <section class="interactive">
+      <h2><i class="fas fa-chart-line"></i> Our Love Meter 💖</h2>
+      <div class="love-meter-container">
+        <div class="meter-info">
+          <p>Current Love Level</p>
+          <p id="lovePercentage" class="percentage">100%</p>
+        </div>
+        <div class="meter-bar">
+          <div class="meter-fill" id="loveFill" style="width: 100%"></div>
+          <div class="meter-ticks">
+            <span>0%</span>
+            <span>50%</span>
+            <span>100%</span>
+            <span>150%</span>
+            <span>200%</span>
+          </div>
+        </div>
+        <button class="love-btn" onclick="increaseLove()">
+          <i class="fas fa-heart-circle-plus"></i> Increase Our Love
+        </button>
+        <p class="love-note-small">Click to make our love grow even more! ❤️</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <i class="fas fa-heart"></i> Alia & Ranbir
+        </div>
+        <p class="footer-text">Made with <i class="fas fa-heart"></i> • For my Alia. ❤️</p>
+        <div class="footer-social">
+          <p>Our Story Continues On:</p>
+          <div class="social-icons">
+            <button class="social-btn" onclick="showSecretMessage()">
+              <i class="fas fa-mobile-alt"></i>
+            </button>
+            <button class="social-btn" onclick="showSecretMessage()">
+              <i class="fas fa-envelope"></i>
+            </button>
+            <button class="social-btn" onclick="showSecretMessage()">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+        </div>
+        <p class="footer-copyright">© 2025, Our Love Story. All Moments reserved. ❤️</p>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Memory Lightbox -->
+    <div id="memoryLightbox" class="memory-lightbox">
+      <button class="lightbox-close" onclick="closeMemory()">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="lightbox-prev" onclick="prevMemory()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="lightbox-content">
+        <img id="lightboxImage" src="" alt="Memory">
+        <div class="lightbox-caption">
+          <h3 id="lightboxTitle"></h3>
+          <p id="lightboxDesc"></p>
+        </div>
+      </div>
+      <button class="lightbox-next" onclick="nextMemory()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Secret Message Modal -->
+    <div id="secretModal" class="secret-modal">
+      <div class="secret-content">
+        <button class="secret-close" onclick="closeSecretModal()">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="secret-heart">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Just For You, Alia! 💖</h3>
+        <p class="secret-message">
+          All our real conversations happen in person, in whispers,<br>
+          and in the spaces between our heartbeats.<br><br>
+          This button? It's just a reminder that I'm always thinking of you.
+        </p>
+        <button class="secret-ok" onclick="closeSecretModal()">
+          I Love You Too ❤️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
