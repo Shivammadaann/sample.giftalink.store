@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranbir & Alia // 2025 Wrapped</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --spotify-green: #1DB954;
+            --wrapped-pink: #ff4b6e;
+            --wrapped-orange: #ff6e3d;
+            --wrapped-purple: #5038a0;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-darker);
+            color: white;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Password Protection Screen */
+        .password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3264 0%, #a0c8d2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .password-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .password-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .password-container h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff4b6e, #ff6e3d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .password-container p {
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .password-input {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .password-input input {
+            width: 100%;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .password-input input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.5);
+        }
+
+        .password-input input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--spotify-green), #1ed760);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(29, 185, 84, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(29, 185, 84, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .hint {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .main-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Full-screen Slide Container */
+        section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Specific Slide Themes */
+        .intro { 
+            background: linear-gradient(135deg, #1e3264 0%, #a0c8d2 100%);
+        }
+        
+        .stats { 
+            background: linear-gradient(135deg, var(--wrapped-purple) 0%, #2a1b5f 100%);
+        }
+        
+        .top-artist { 
+            background: linear-gradient(135deg, var(--wrapped-pink) 0%, #c2185b 100%);
+        }
+        
+        .aura { 
+            background: linear-gradient(135deg, #f59b23 0%, #e13300 100%);
+        }
+        
+        .summary { 
+            background: linear-gradient(135deg, var(--spotify-green) 0%, #0d904f 100%);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Spotify Wrapped Style Card */
+        .wrapped-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            animation: cardAppear 1.2s ease-out;
+        }
+
+        .stat-number {
+            font-size: 8rem;
+            font-weight: 900;
+            display: block;
+            color: #fff;
+            text-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+            margin: 20px 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Floating Image Style */
+        .couple-photo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 10px solid rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            animation: float 3.5s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(2deg); }
+        }
+
+        /* Slide Navigation */
+        .slide-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            position: fixed;
+            top: 20px;
+            width: 90%;
+            left: 5%;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            flex-grow: 1;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: white;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* Aura Elements */
+        .aura-container {
+            display: flex;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .aura-item {
+            text-align: center;
+            animation: auraPulse 4s infinite ease-in-out;
+        }
+
+        .aura-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            filter: blur(25px);
+            opacity: 0.9;
+        }
+
+        .aura-wholesome {
+            background: linear-gradient(45deg, #fff176, #ffd54f);
+            animation-delay: 0.5s;
+        }
+
+        .aura-adventurous {
+            background: linear-gradient(45deg, #ff5252, #ff8a80);
+            animation-delay: 1s;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cardAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes auraPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Slide Content Animations */
+        .slide-content {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.2rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            p {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .stat-number {
+                font-size: 5rem;
+            }
+            
+            .couple-photo {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .aura-circle {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .wrapped-card {
+                padding: 30px 20px;
+                margin: 0 20px;
+            }
+            
+            .password-container {
+                padding: 30px 20px;
+            }
+            
+            .music-player {
+                width: auto;
+                padding: 8px 15px;
+            }
+            
+            .song-thumbnail {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .song-info {
+                max-width: 100px;
+            }
+        }
+
+        /* Enhanced Music Player */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 101;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            width: 320px;
+        }
+
+        .music-player:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--spotify-green);
+            transform: scale(1.1);
+        }
+
+        .song-thumbnail {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .song-thumbnail:hover {
+            transform: scale(1.05);
+            border-color: var(--spotify-green);
+        }
+
+        .song-info {
+            flex: 1;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .song-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 3px;
+        }
+
+        .song-artist {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-progress {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar-music {
+            height: 100%;
+            width: 45%;
+            background: var(--spotify-green);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Share Button */
+        .share-btn {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 12px 20px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 101;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Decorative Elements */
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: floatAround 20s infinite linear;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, -50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(50px, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-100px, 50px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Fix for slides visibility */
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Protection Screen -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-container">
+            <h1>R&A Wrapped 2025</h1>
+            <p>This personalized experience is for Ranbir & Alia only. Enter the secret code to continue.</p>
+            <div class="password-input">
+                <input type="password" id="passwordInput" placeholder="Enter the secret code" autocomplete="off">
+            </div>
+            <button class="submit-btn" id="submitPassword">
+                <i class="fas fa-lock-open"></i> Unwrap Memories
+            </button>
+            <div class="error-message" id="errorMessage">
+                Incorrect code. Please Enter "giftalink" without spaces to access the Demo Page.
+            </div>
+            <div class="hint">
+                Password for Demo Website - giftalink
+            </div>
+        </div>
+        
+        <!-- Decorative elements -->
+        <div class="floating-heart" style="top: 20%; left: 10%;"><i class="fas fa-heart"></i></div>
+        <div class="floating-heart" style="top: 70%; left: 15%;"><i class="fas fa-music"></i></div>
+        <div class="floating-heart" style="top: 30%; right: 10%;"><i class="fas fa-star"></i></div>
+        <div class="floating-heart" style="top: 80%; right: 20%;"><i class="fas fa-heart"></i></div>
+    </div>
+
+    <!-- Main Content (Hidden until password is entered) -->
+    <div class="main-content" id="mainContent">
+        <!-- Enhanced Music Player -->
+        <div class="music-player" id="musicPlayer">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                 alt="Song Thumbnail" 
+                 class="song-thumbnail">
+            <div class="song-info">
+                <div class="song-title">Our Office Anthem</div>
+                <div class="song-artist">Ranbir & Alia</div>
+                <div class="music-progress">
+                    <div class="progress-bar-music" id="musicProgress"></div>
+                </div>
+            </div>
+            <button class="music-btn" id="playBtn">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+
+        <!-- Share Button -->
+        <button class="share-btn" id="shareBtn">
+            <i class="fas fa-share-alt"></i> Share
+        </button>
+
+        <!-- Top Progress Bars -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress1"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress2"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress3"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress4"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress5"></div>
+            </div>
+        </div>
+
+        <!-- Slide 1: Intro -->
+        <section class="intro slide active" id="slide1">
+            <div class="slide-content active">
+                <h1>2025</h1>
+                <h2>Ranbir & Alia's <br> <span style="color: #ff4b6e;">SPOTIFY WRAPPED</span></h2>
+                <p>A year of love, laughter, and countless memories. Let's revisit your journey together.</p>
+                <div style="margin-top: 30px;">
+                    <button class="submit-btn" id="startJourneyBtn">
+                        <i class="fas fa-play-circle"></i> Start Your Journey
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Decorative elements -->
+            <div class="floating-heart" style="top: 15%; left: 5%;"><i class="fas fa-heart"></i></div>
+            <div class="floating-heart" style="top: 85%; left: 8%;"><i class="fas fa-music"></i></div>
+            <div class="floating-heart" style="top: 20%; right: 7%;"><i class="fas fa-star"></i></div>
+        </section>
+
+        <!-- Slide 2: The "Minutes Played" -->
+        <section class="stats slide" id="slide2">
+            <div class="wrapped-card slide-content">
+                <p style="font-size: 1.5rem;">Total time spent together this year</p>
+                <span class="stat-number">525,600</span>
+                <p>Minutes of pure happiness, late-night talks, and endless laughter. That's <strong>365 days</strong> of non-stop togetherness.</p>
+                <p style="font-style: italic; margin-top: 20px;">"How do you measure a year? In daylights, in sunsets, in midnights, in cups of coffee..."</p>
+            </div>
+        </section>
+
+        <!-- Slide 3: Top Artist (The Partner) -->
+        <section class="top-artist slide" id="slide3">
+            <div class="slide-content">
+                <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ranbir & Alia" class="couple-photo">
+                <p style="font-size: 1.5rem;">Your #1 Top Artist of the Year</p>
+                <h1>Each Other</h1>
+                <p>You couldn't stop thinking about one another. You're in the top <strong>0.001%</strong> of each other's favorite people worldwide.</p>
+                <div style="margin-top: 30px; display: flex; gap: 20px; justify-content: center;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: white;">🎵</div>
+                        <p>Top Genre: <strong>Romantic Comedy</strong></p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: white;">🔥</div>
+                        <p>Streak: <strong>365 days</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Audio Aura (The Relationship Vibe) -->
+        <section class="aura slide" id="slide4">
+            <div class="slide-content">
+                <h1>Your Love Aura</h1>
+                <p style="font-size: 1.5rem;">The colors of your year together</p>
+                
+                <div class="aura-container">
+                    <div class="aura-item">
+                        <div class="aura-circle aura-wholesome"></div>
+                        <p style="font-weight: 600; font-size: 1.4rem;">Wholesome</p>
+                        <p>Cozy nights & heartfelt conversations</p>
+                    </div>
+                    <div class="aura-item">
+                        <div class="aura-circle aura-adventurous"></div>
+                        <p style="font-weight: 600; font-size: 1.4rem;">Adventurous</p>
+                        <p>Spontaneous trips & new experiences</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 40px; max-width: 800px;">Your year was a perfect mix of cozy coffee dates, wild office memories, and everything in between. The harmony in your aura shows a relationship that's both grounding and exciting.</p>
+            </div>
+        </section>
+
+        <!-- Slide 5: The Summary / Thank You -->
+        <section class="summary slide" id="slide5">
+            <div class="wrapped-card slide-content">
+                <h2>Ranbir & Alia's 2025</h2>
+                <div style="display: flex; justify-content: center; margin: 30px 0;">
+                    <div style="text-align: left; font-size: 1.5rem; line-height: 2.2;">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 40px; height: 40px; background: #ff4b6e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <span><strong>Top Song:</strong> "Our Office Anthem"</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 40px; height: 40px; background: #ff6e3d; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span><strong>Top Venue:</strong> "Late Night Drive"</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 40px; height: 40px; background: #5038a0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span><strong>Top Moment:</strong> "The First Smile"</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h1 style="font-size: 2.5rem; margin-top: 40px; color: #121212; font-weight: 800;">Keep Playing Forever.</h1>
+                <p style="margin-top: 20px; color: rgba(0,0,0,0.8);">Here's to another year of beautiful moments together.</p>
+                
+                <div style="margin-top: 40px;">
+                    <button class="submit-btn" id="replayBtn" style="background: linear-gradient(45deg, #121212, #333);">
+                        <i class="fas fa-redo"></i> Relive The Journey
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Decorative elements -->
+            <div class="floating-heart" style="bottom: 10%; left: 10%;"><i class="fas fa-heart"></i></div>
+            <div class="floating-heart" style="bottom: 20%; right: 15%;"><i class="fas fa-music"></i></div>
+        </section>
+
+        <!-- Slide Navigation -->
+        <div class="slide-nav">
+            <button class="nav-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Password Protection
+        const passwordScreen = document.getElementById('passwordScreen');
+        const mainContent = document.getElementById('mainContent');
+        const passwordInput = document.getElementById('passwordInput');
+        const submitPassword = document.getElementById('submitPassword');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // Correct password (change this to your preferred code)
+        const correctPassword = "giftalink"; // Example: April 14
+        
+        submitPassword.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        function checkPassword() {
+            if (passwordInput.value === correctPassword) {
+                // Correct password
+                passwordScreen.classList.add('hidden');
+                
+                // Show main content with delay
+                setTimeout(() => {
+                    mainContent.classList.add('active');
+                    // Initialize slides
+                    initSlides();
+                }, 500);
+            } else {
+                // Incorrect password
+                errorMessage.style.display = 'block';
+                passwordInput.style.animation = 'shake 0.5s';
+                
+                // Remove shake animation after it completes
+                setTimeout(() => {
+                    passwordInput.style.animation = '';
+                }, 500);
+            }
+        }
+        
+        // Add shake animation for incorrect password
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Slide Management
+        const slides = document.querySelectorAll('.slide');
+        const slideContents = document.querySelectorAll('.slide-content');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const startJourneyBtn = document.getElementById('startJourneyBtn');
+        const replayBtn = document.getElementById('replayBtn');
+        const progressFills = [
+            document.getElementById('progress1'),
+            document.getElementById('progress2'),
+            document.getElementById('progress3'),
+            document.getElementById('progress4'),
+            document.getElementById('progress5')
+        ];
+        
+        let currentSlide = 1;
+        let totalSlides = 5;
+        
+        function initSlides() {
+            // Set up event listeners
+            prevBtn.addEventListener('click', () => changeSlide(-1));
+            nextBtn.addEventListener('click', () => changeSlide(1));
+            startJourneyBtn.addEventListener('click', () => goToSlide(2));
+            replayBtn.addEventListener('click', () => goToSlide(1));
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    changeSlide(-1);
+                } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                    changeSlide(1);
+                }
+            });
+            
+            // Swipe support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe left
+                    changeSlide(1);
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe right
+                    changeSlide(-1);
+                }
+            }
+            
+            // Initialize first slide
+            goToSlide(1);
+        }
+        
+        // Change slide
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            
+            if (newSlide >= 1 && newSlide <= totalSlides) {
+                goToSlide(newSlide);
+            }
+        }
+        
+        // Go to specific slide
+        function goToSlide(slideNumber) {
+            // Hide all slides and content
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                slideContents[index].classList.remove('active');
+            });
+            
+            // Reset all progress bars
+            progressFills.forEach(fill => {
+                fill.style.width = '0%';
+            });
+            
+            // Update current slide
+            currentSlide = slideNumber;
+            
+            // Show current slide
+            const currentSlideElement = document.getElementById(`slide${slideNumber}`);
+            const currentSlideContent = currentSlideElement.querySelector('.slide-content');
+            
+            currentSlideElement.classList.add('active');
+            
+            // Animate content in
+            setTimeout(() => {
+                currentSlideContent.classList.add('active');
+            }, 100);
+            
+            // Update progress bars
+            for (let i = 0; i < slideNumber; i++) {
+                setTimeout(() => {
+                    progressFills[i].style.width = '100%';
+                }, (i + 1) * 150);
+            }
+            
+            // Scroll to top of the slide
+            window.scrollTo({
+                top: currentSlideElement.offsetTop,
+                behavior: 'smooth'
+            });
+            
+            // Update navigation button states
+            updateNavButtons();
+        }
+        
+        function updateNavButtons() {
+            prevBtn.style.opacity = currentSlide === 1 ? '0.5' : '1';
+            nextBtn.style.opacity = currentSlide === totalSlides ? '0.5' : '1';
+        }
+        
+        // Enhanced Music Player
+        function initMusicPlayer() {
+            const playBtn = document.getElementById('playBtn');
+            const musicProgress = document.getElementById('musicProgress');
+            let isPlaying = false;
+            let progress = 45; // Start at 45%
+            
+            // Simulated audio (would be a real Audio object in production)
+            const updateProgress = () => {
+                if (isPlaying && progress < 100) {
+                    progress += 0.5;
+                    musicProgress.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        progress = 0;
+                        musicProgress.style.width = '0%';
+                    }
+                }
+            };
+            
+            // Update progress every 500ms
+            let progressInterval = setInterval(updateProgress, 500);
+            
+            playBtn.addEventListener('click', () => {
+                isPlaying = !isPlaying;
+                
+                if (isPlaying) {
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    // In a real implementation, you would call audio.play() here
+                } else {
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    // In a real implementation, you would call audio.pause() here
+                }
+            });
+            
+            // Click on progress bar to seek
+            document.querySelector('.music-progress').addEventListener('click', (e) => {
+                const rect = e.target.getBoundingClientRect();
+                const clickPosition = (e.clientX - rect.left) / rect.width;
+                progress = clickPosition * 100;
+                musicProgress.style.width = `${progress}%`;
+            });
+            
+            // Simulate song change every 3 minutes
+            setInterval(() => {
+                if (isPlaying) {
+                    progress = 0;
+                    musicProgress.style.width = '0%';
+                }
+            }, 180000);
+        }
+        
+        // Share button
+        function initShareButton() {
+            const shareBtn = document.getElementById('shareBtn');
+            shareBtn.addEventListener('click', () => {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Ranbir & Alia 2025 Wrapped',
+                        text: 'Check out our personalized 2025 Wrapped!',
+                        url: window.location.href,
+                    });
+                } else {
+                    // Fallback
+                    navigator.clipboard.writeText(window.location.href);
+                    shareBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Share';
+                    }, 2000);
+                }
+            });
+        }
+        
+        // Initialize everything when password is correct
+        window.addEventListener('DOMContentLoaded', () => {
+            // For demo purposes, you can bypass password by changing the following line to true
+            const bypassPassword = false;
+            
+            if (bypassPassword) {
+                passwordScreen.classList.add('hidden');
+                mainContent.classList.add('active');
+                initSlides();
+                initMusicPlayer();
+                initShareButton();
+                goToSlide(1);
+            } else {
+                // Focus on password input
+                passwordInput.focus();
+            }
+        });
+        
+        // Initialize after password is entered
+        // This will be called from checkPassword function
+        function initAfterPassword() {
+            initSlides();
+            initMusicPlayer();
+            initShareButton();
+        }
+        
+        // Update checkPassword to call initAfterPassword
+        const originalCheckPassword = checkPassword;
+        checkPassword = function() {
+            originalCheckPassword();
+            if (passwordInput.value === correctPassword) {
+                setTimeout(initAfterPassword, 100);
+            }
+        };
+    </script>
+</body>
+</html>
